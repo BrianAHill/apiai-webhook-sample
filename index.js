@@ -13,7 +13,6 @@ restService.post('/hook', function (req, res) {
 //test
     try {
 
-        console.log('here');
         console.log(req.headers);
         var speech = 'empty speech';
         var UserId=req.headers.userid;
@@ -21,11 +20,10 @@ restService.post('/hook', function (req, res) {
         var Password=req.headers.password;
         var AppId=req.headers.appid;
         var ApplicationKey=req.headers.applicationkey;
-        
-
-        
-        
-        if (req.body) {
+     
+        console.log(AppId);
+       
+         if (req.body) {
             var requestBody = req.body;
 
             var AuthURL='https://www.pcrecruiter.net/rest/api/access-token?DatabaseId=' + DatabaseId + '&Username=' + UserId + '&Password=' + Password + '&AppId=' + AppId + '&ApiKey=' + ApplicationKey;
