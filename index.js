@@ -13,7 +13,7 @@ restService.post('/hook', function (req, res) {
 //test
     try {
 
-                console.log(req.headers.UserId);
+        console.log(req.headers);
         var speech = 'empty speech';
         var UserId=req.headers.UserId;
         var DatabaseId=req.headers.DatabaseId;
