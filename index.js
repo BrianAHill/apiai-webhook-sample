@@ -21,8 +21,7 @@ restService.post('/hook', function (req, res) {
         var AppId=req.headers.appid;
         var ApplicationKey=req.headers.applicationkey;
      
-        console.log(AppId);
-       
+      
          if (req.body) {
             var requestBody = req.body;
 
@@ -30,12 +29,12 @@ restService.post('/hook', function (req, res) {
             
             console.log('AuthURL: ',AuthURL);
             
-            /*var request = require('request');
+            var request = require('request');
             request(AuthURL, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
                     console.log(body) 
                  }
-            })*/
+            })
             
             if (requestBody.result) {
                 speech = '';
