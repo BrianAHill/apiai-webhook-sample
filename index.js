@@ -16,8 +16,8 @@ restService.post('/hook', function (req, res) {
         console.log('here');
         console.log(req.headers);
         var speech = 'empty speech';
-        /*var UserId=req.headers.UserId;
-        var DatabaseId=req.headers.DatabaseId;
+        var UserId=req.headers.UserId;
+        /*var DatabaseId=req.headers.DatabaseId;
         var Password=req.headers.Password;
         var AppId=req.headers.AppId;
         var ApplicationKey=req.headers.ApplicationKey;
