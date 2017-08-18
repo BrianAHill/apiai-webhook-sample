@@ -12,12 +12,17 @@ restService.post('/hook', function (req, res) {
     console.log('hook request');
 //test
     try {
+
+                console.log(req.headers.UserId);
         var speech = 'empty speech';
         var UserId=req.headers.UserId;
         var DatabaseId=req.headers.DatabaseId;
         var Password=req.headers.Password;
         var AppId=req.headers.AppId;
         var ApplicationKey=req.headers.ApplicationKey;
+        
+
+        
         
         if (req.body) {
             var requestBody = req.body;
