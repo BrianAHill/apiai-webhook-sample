@@ -22,8 +22,14 @@ restService.post('/hook', function (req, res) {
         if (req.body) {
             var requestBody = req.body;
 
-            console.log(req.body);
-            console.log(req.headers);
+            var AuthURL='https://www.pcrecruiter.net/rest/api/access-token?DatabaseId=' + DatabaseId + '&Username=' + UserId + '&Password=' + Password + '&AppId=' + AppId + '&ApiKey=' + ApplicationKey;
+            
+            var request = require('request');
+            request(AuthURL, function (error, response, body) {
+                if (!error && response.statusCode == 200) {
+                    console.log(body) 
+                 }
+            })
             
             if (requestBody.result) {
                 speech = '';
