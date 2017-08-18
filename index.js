@@ -30,7 +30,7 @@ restService.post('/hook', function (req, res) {
 
             var AuthURL='https://www.pcrecruiter.net/rest/api/access-token?DatabaseId=' + DatabaseId + '&Username=' + UserId + '&Password=' + Password + '&AppId=' + AppId + '&ApiKey=' + ApplicationKey;
             
-            console.log(AuthURL);
+            console.log('AuthURL: ',AuthURL);
             
             /*var request = require('request');
             request(AuthURL, function (error, response, body) {
