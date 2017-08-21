@@ -42,10 +42,11 @@ function GetSessionToken(req)
             res.on('data', function(d) {
                 console.info('GET result:\n');
                 process.stdout.write(d);
-                results = JSON.parse(d);
                 console.info('\n\nCall completed');
             });
-
+            
+            GetSession("SessionId", function(data){
+                results = JSON.parse(d); //
         });
 
         reqGet.end();    
