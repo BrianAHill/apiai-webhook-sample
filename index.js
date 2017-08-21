@@ -53,7 +53,7 @@ function GetSessionToken(req)
                         return console.log('Error whil trying to get price: ',err);       
                 }
         
-                console.log('Sessionid::::',result);
+                //console.log('Sessionid::::',result);
         });
             
         return result;             
