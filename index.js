@@ -50,7 +50,7 @@ function GetSessionToken(req)
 
         reqGet.end();    
 
-        colsole.log('Here');
+        console.log('Here');
         console.log('Returning Session:',results.SessionId);
         return results.SessionId;
     
