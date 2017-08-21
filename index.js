@@ -21,7 +21,7 @@ function GetJSON(options,cb)
                 res.on('end',function(){
                         var result=JSON.parse(body);
                         cb(null,result);
-                        console.log(SessionId);
+                        console.log(result);
                 });    
                 
                 res.on('error',cb);
