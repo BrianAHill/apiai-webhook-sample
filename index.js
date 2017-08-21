@@ -71,7 +71,7 @@ restService.post('/hook', function (req, res) {
         var speech = 'empty speech';
    
         var SessionId=GetSessionToken(req);
-        console.log('Session Id',SessionId)
+        console.log('Session Retreived',SessionId)
             
          if (req.body) {
             var requestBody = req.body;
