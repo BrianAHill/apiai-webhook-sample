@@ -11,7 +11,7 @@ var https = require('https');
 
 function GetJSON(options,cb)
 {
-        https.request(optoins,function(res){
+        https.request(options,function(res){
                 var body='';
                 
                 res.on('data',function(chunk){
