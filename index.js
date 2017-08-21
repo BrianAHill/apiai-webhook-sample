@@ -56,32 +56,8 @@ function GetSessionToken(req)
                 console.log('Sessionid::::',result);
         });
             
-                
-        console.info('Options prepared:');
-        console.info(optionsget);
-        console.info('Do the GET call');
-
-        // do the GET request
-        var reqGet = https.request(optionsget, function(res) {
-            console.log("statusCode: ", res.statusCode);
-            // uncomment it for header details
-        //  console.log("headers: ", res.headers);
-
-
-            res.on('data', function(d) {
-                console.info('GET result:\n');
-                process.stdout.write(d);
-                console.info('\n\nCall completed');
-            });
-            
-        });
-
-        reqGet.end();    
-
-        console.log('Here');
-        console.log('Returning Session:',results.SessionId);
-        return results.SessionId;
-    
+        return result;             
+   
 }
 
 restService.post('/hook', function (req, res) {
