@@ -7,7 +7,27 @@ var port=443
 
 const restService = express();
 restService.use(bodyParser.json());
+var https = require('https');
 
+function GetJSON(options,cb)
+{
+        http.request(optoins,function(res){
+                var body='';
+                
+                res.on('data',function(chunk){
+                        body+=chunk;
+                });
+                              
+                res.on('end',function(){
+                        var result=JSON.parse(body);
+                        cb(null,result);
+                        console.log(SessionId);
+                
+                res.on('error',cb);
+                });
+                .on('error',cb);
+                .end();                
+}
 
 //Gets the session tokena and returns it as a string to use for other calls
 function GetSessionToken(req)
@@ -18,7 +38,7 @@ function GetSessionToken(req)
         var AppId=req.headers.appid;
         var ApplicationKey=req.headers.applicationkey;
         var results;
-        var https = require('https');
+
 
         // options for GET
         var optionsget = {
@@ -28,6 +48,15 @@ function GetSessionToken(req)
             method : 'GET' // do GET
         };
 
+        GetJSON(optionsget,function(err,result){
+                if(err){
+                        return console.log('Error whil trying to get price: ',err);       
+                }
+        
+                console.log('Sessionid::::',result);
+        });
+            
+                
         console.info('Options prepared:');
         console.info(optionsget);
         console.info('Do the GET call');
