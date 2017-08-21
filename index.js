@@ -21,7 +21,6 @@ function GetJSON(options,cb)
                 res.on('end',function(){
                         var result=JSON.parse(body);
                         cb(null,result);
-                        console.log(result);
                 });    
                 
                 res.on('error',cb);
@@ -53,10 +52,10 @@ function GetSessionToken(req)
                         return console.log('Error getting Token: ',err);       
                 }
         
-                //console.log('Sessionid::::',result);
+                console.log(result);
         });
             
-        return result;             
+        //return result;             
    
 }
 
