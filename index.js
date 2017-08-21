@@ -22,10 +22,12 @@ function GetJSON(options,cb)
                         var result=JSON.parse(body);
                         cb(null,result);
                         console.log(SessionId);
+                });    
                 
                 res.on('error',cb);
-                });
-                .on('error',cb);
+                
+                })
+                .on('error',cb)
                 .end();                
 }
 
