@@ -52,7 +52,7 @@ function GetSessionToken(req)
                         return console.log('Error getting Token: ',err);       
                 }
         
-                SessionId=result
+                SessionId=result;
         });
         
         console.log('Here why blank sessionid');
