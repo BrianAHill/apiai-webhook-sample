@@ -26,9 +26,7 @@ function GetJSON(options,cb)
                 
                 res.on('error',cb);
                 
-                })
-                .on('error',cb)
-                .end();                
+                }).end();                
 }
 
 //Gets the session tokena and returns it as a string to use for other calls
