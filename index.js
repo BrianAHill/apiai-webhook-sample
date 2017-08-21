@@ -61,6 +61,8 @@ function GetSessionToken(req,cb)
 restService.post('/hook', function (req, res) {
 
     var Token;
+    var FirstName;
+    var LastName;
         
     console.log('hook request');
     try {
@@ -74,18 +76,19 @@ restService.post('/hook', function (req, res) {
                 }
         
                 Token=result.SessionId;
-                console.log(req.body);
+                              
                 
                  if (req.body) {
                     var requestBody = req.body;
-
-
+                    FirstName=req.body.parameters.First-Name;
+                    LastName=req.body.parameters.Last-Name;
+                      
                     if (requestBody.result) {
                         speech = '';
 
                         if (requestBody.result.fulfillment) {
                             speech += requestBody.result.fulfillment.speech;
-                            speech += ' ';
+                            speech += 'You would like to add a note to ' + FirstName + ' ' + LastName + '?';
                         }
 
                         if (requestBody.result.action) {
