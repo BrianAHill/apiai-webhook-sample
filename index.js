@@ -36,7 +36,7 @@ function GetSessionToken(req)
         var Password=req.headers.password;
         var AppId=req.headers.appid;
         var ApplicationKey=req.headers.applicationkey;
-        var results;
+        var SessionId;
 
 
         // options for GET
@@ -52,10 +52,10 @@ function GetSessionToken(req)
                         return console.log('Error getting Token: ',err);       
                 }
         
-                console.log(result);
+                SessionId=result
         });
             
-        //return result;             
+        return SessionId;             
    
 }
 
