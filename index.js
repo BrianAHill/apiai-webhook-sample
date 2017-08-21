@@ -55,11 +55,10 @@ function GetSessionToken(req)
                         return console.log('Error getting Token: ',err);       
                 }
         
-                TokenReturn=result.SessionId;
+                return result.SessionId;
         });
         
-        console.log('Here why blank sessionid2');
-        return TokenReturn;             
+       
    
 }
 
