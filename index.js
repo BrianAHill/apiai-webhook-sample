@@ -29,7 +29,7 @@ function GetJSON(options,cb)
 }
 
 //Gets the session tokena and returns it as a string to use for other calls
-function GetSessionToken(req)
+function GetSessionToken(req,cb)
 {
         var UserId=req.headers.userid;
         var DatabaseId=req.headers.databaseid;
@@ -54,8 +54,7 @@ function GetSessionToken(req)
                 if(err){
                         return console.log('Error getting Token: ',err);       
                 }
-        
-                return result.SessionId;
+                cb(null,result);
         });
         
        
@@ -64,13 +63,26 @@ function GetSessionToken(req)
 
 restService.post('/hook', function (req, res) {
 
+    var Token;
+        
     console.log('hook request');
     try {
 
         var speech = 'empty speech';
    
-        var SessionId=GetSessionToken(req);
-        console.log('Session Retreived',SessionId)
+        GetSessionToken(req,function(err,result){
+                console.log('GettingSession');
+                console.log(result);
+                console.log(result.SessionId);
+                if(err){
+                        return console.log('Error getting Token: ',err);       
+                }
+        
+                Token=result.SessionId;
+        });          
+            
+        //var SessionId=GetSessionToken(req);
+        console.log('Session Retreived',Token)
             
          if (req.body) {
             var requestBody = req.body;
