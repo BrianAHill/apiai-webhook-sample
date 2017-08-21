@@ -43,6 +43,7 @@ function GetSessionToken(req)
                 console.info('GET result:\n');
                 process.stdout.write(d);
                 var results = JSON.parse(d);
+                return results.SessionId;    
                 console.info('\n\nCall completed');
             });
 
