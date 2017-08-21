@@ -55,7 +55,7 @@ function GetSessionToken(req)
                 SessionId=result;
         });
         
-        console.log('Here why blank sessionid');
+        console.log('Here why blank sessionid2');
         return SessionId;             
    
 }
