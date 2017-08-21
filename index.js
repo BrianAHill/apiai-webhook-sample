@@ -48,9 +48,6 @@ function GetSessionToken(req,cb)
         };
 
         GetJSON(optionsget,function(err,result){
-                console.log('Here I be');
-                console.log(result);
-                console.log(result.SessionId);
                 if(err){
                         return console.log('Error getting Token: ',err);       
                 }
@@ -71,16 +68,14 @@ restService.post('/hook', function (req, res) {
         var speech = 'empty speech';
    
         GetSessionToken(req,function(err,result){
-                console.log('GettingSession');
-                console.log(result);
-                console.log(result.SessionId);
+
                 if(err){
                         return console.log('Error getting Token: ',err);       
                 }
         
                 Token=result.SessionId;
-                console.log('Session Retreived',Token)
-
+                console.log(req.body);
+                
                  if (req.body) {
                     var requestBody = req.body;
 
