@@ -17,7 +17,7 @@ function GetSessionToken(req)
         var Password=req.headers.password;
         var AppId=req.headers.appid;
         var ApplicationKey=req.headers.applicationkey;
-    
+        var results;
         var https = require('https');
 
         // options for GET
@@ -42,7 +42,7 @@ function GetSessionToken(req)
             res.on('data', function(d) {
                 console.info('GET result:\n');
                 process.stdout.write(d);
-                var results = JSON.parse(d);
+                results = JSON.parse(d);
                 console.info('\n\nCall completed');
             });
 
