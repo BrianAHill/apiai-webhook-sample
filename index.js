@@ -50,7 +50,7 @@ function GetSessionToken(req)
         GetJSON(optionsget,function(err,result){
                 console.log('Here I be');
                 console.log(result);
-                console.log(SessionId);
+                console.log(result.SessionId);
                 if(err){
                         return console.log('Error getting Token: ',err);       
                 }
