@@ -45,8 +45,6 @@ function GetSessionToken(req)
                 console.info('\n\nCall completed');
             });
             
-            GetSession("SessionId", function(data){
-                results = JSON.parse(d); //
         });
 
         reqGet.end();    
