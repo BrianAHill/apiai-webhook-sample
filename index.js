@@ -42,6 +42,7 @@ function GetSessionToken(req)
             res.on('data', function(d) {
                 console.info('GET result:\n');
                 process.stdout.write(d);
+                var results = JSON.parse(d);
                 console.info('\n\nCall completed');
             });
 
@@ -49,19 +50,20 @@ function GetSessionToken(req)
 
         reqGet.end();    
     
-    
+        return results.SessionId;
     
 }
 
 restService.post('/hook', function (req, res) {
 
     console.log('hook request');
-//test
     try {
 
         var speech = 'empty speech';
    
-      
+        var SessionId=GetSessionToken(req);
+        console.log('Session Id',SessionId)
+            
          if (req.body) {
             var requestBody = req.body;
        
