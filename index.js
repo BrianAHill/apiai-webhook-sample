@@ -79,10 +79,11 @@ restService.post('/hook', function (req, res) {
                 }
         
                 Token=result.SessionId;
+                console.log('Session Retreived',Token)
         });          
             
         //var SessionId=GetSessionToken(req);
-        console.log('Session Retreived',Token)
+        //console.log('Session Retreived',Token)
             
          if (req.body) {
             var requestBody = req.body;
