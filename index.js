@@ -93,15 +93,15 @@ restService.post('/hook', function (req, res) {
                         if(requestBody.action=='AddNote')
                         {
                                 // options for GET
-                                var optionsget = {
+                                var optionscan= {
                                     host : host, // here only the domain name
                                     port : port,
-                                    path : '/rest/api/candidates?Query=FirstName eq ' + FirstName + ' and LastName eq ' + LastName + '&ResultsPerPage=25&SessionId=' + Token, // the rest of the url with parameters if needed
+                                    path : encodeURI('/rest/api/candidates?Query=FirstName eq ' + FirstName + ' and LastName eq ' + LastName + '&ResultsPerPage=25&SessionId=' + Token), // the rest of the url with parameters if needed
                                     method : 'GET' // do GET
                                 };
-                                
+                                                                                               
                                 //Search for the candidate record
-                                GetJSON(optionsget,function(err,result){
+                                GetJSON(optionscan,function(err,result){
                                 if(err){
                                         return console.log('Error getting Token: ',err);       
                                 }
