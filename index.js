@@ -105,6 +105,7 @@ restService.post('/hook', function (req, res) {
                                 if(err){
                                         return console.log('Error getting Token: ',err);       
                                 }
+                                        console.log(optionscan.path);
                                         cb(null,result);
                                         console.log(result);
                                 });
@@ -117,9 +118,9 @@ restService.post('/hook', function (req, res) {
                             speech += 'You would like to add a note to ' + FirstName + ' ' + LastName + '?';
                         }
 
-                        if (requestBody.result.action) {
+                        /*if (requestBody.result.action) {
                             speech += 'action: ' + requestBody.result.action;
-                        }
+                        }*/
                     }
                 }
 
