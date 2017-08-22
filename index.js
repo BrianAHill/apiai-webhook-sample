@@ -80,8 +80,8 @@ restService.post('/hook', function (req, res) {
                 
                  if (req.body) {
                     var requestBody = req.body;
-                    FirstName=req.body.parameters.First-Name;
-                    LastName=req.body.parameters.Last-Name;
+                    FirstName=requestBody.result.parameters.First-Name;
+                    LastName=requestBody.result.parameters.Last-Name;
                     console.log(req.body);
                       
                     if (requestBody.result) {
