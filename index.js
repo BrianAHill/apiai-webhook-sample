@@ -82,6 +82,7 @@ restService.post('/hook', function (req, res) {
                     var requestBody = req.body;
                     FirstName=req.body.parameters.First-Name;
                     LastName=req.body.parameters.Last-Name;
+                    console.log(req.body);
                       
                     if (requestBody.result) {
                         speech = '';
