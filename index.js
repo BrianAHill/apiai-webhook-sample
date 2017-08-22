@@ -88,6 +88,20 @@ restService.post('/hook', function (req, res) {
                     if (requestBody.result) {
                         speech = '';
 
+                        if(requestBody.action=='AddNote')
+                        {
+                                // options for GET
+                                var optionsget = {
+                                    host : host, // here only the domain name
+                                    port : port,
+                                    path : '/rest/api/candidates?Query=FirstName eq ' + FirstName + ' and LastName eq ' + LastName + '&ResultsPerPage=25&SessionId=' + Token, // the rest of the url with parameters if needed
+                                    method : 'GET' // do GET
+                                };
+                                //Search for the candidate record
+                                https://www.pcrecruiter.net/rest/api/candidates?Query=FirstName+eq+Alan+and+LastName+eq+Hughes&ResultsPerPage=25
+                        
+                        }
+                            
                         if (requestBody.result.fulfillment) {
                             speech += requestBody.result.fulfillment.speech;
                             speech += 'You would like to add a note to ' + FirstName + ' ' + LastName + '?';
