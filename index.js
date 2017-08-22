@@ -2,7 +2,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const promise=require('promise');
+var promise=require('promise');
 var host="www.pcrecruiter.net"
 var port=443
 
