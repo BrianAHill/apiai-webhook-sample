@@ -97,9 +97,17 @@ restService.post('/hook', function (req, res) {
                                     path : '/rest/api/candidates?Query=FirstName eq ' + FirstName + ' and LastName eq ' + LastName + '&ResultsPerPage=25&SessionId=' + Token, // the rest of the url with parameters if needed
                                     method : 'GET' // do GET
                                 };
+                                
                                 //Search for the candidate record
-                                https://www.pcrecruiter.net/rest/api/candidates?Query=FirstName+eq+Alan+and+LastName+eq+Hughes&ResultsPerPage=25
-                        
+                                GetJSON(optionsget,function(err,result){
+                                if(err){
+                                        return console.log('Error getting Token: ',err);       
+                                }
+                                        cb(null,result);
+                                        console.log(result);
+                                });
+                                
+                                
                         }
                             
                         if (requestBody.result.fulfillment) {
