@@ -105,7 +105,7 @@ restService.post('/hook', function (req, res) {
                                 if(err){
                                         return console.log('Error getting Token: ',err);       
                                 }
-                                        console.log(optionscan.path);
+                                        console.log('About to call URL');
                                         cb(null,result);
                                         console.log(result);
                                 });
