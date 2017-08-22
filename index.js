@@ -85,7 +85,7 @@ restService.post('/hook', function (req, res) {
                     LastName=requestBody.result.parameters.LastName;
 
                       
-                    if (requestBody.result) {
+                   /* if (requestBody.result) {
                         speech = '';
                         console.log('About To Add Note1');
                         console.log(requestBody.action);
@@ -110,7 +110,7 @@ restService.post('/hook', function (req, res) {
                                 });
                                 
                                 
-                        }
+                        }*/
                             
                         if (requestBody.result.fulfillment) {
                             speech += requestBody.result.fulfillment.speech;
