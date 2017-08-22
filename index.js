@@ -87,7 +87,7 @@ restService.post('/hook', function (req, res) {
                       
                     if (requestBody.result) {
                         speech = '';
-                        console.log('About To Add Note');
+                        console.log('About To Add Note1');
                         console.log(requestBody.action);
                             
                         if(requestBody.action=='AddNote')
