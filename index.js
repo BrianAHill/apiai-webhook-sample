@@ -90,7 +90,7 @@ restService.post('/hook', function (req, res) {
                         console.log('About To Add Note1');
                         //console.log(req.action);//test
                             
-                        /*if(requestBody.action=='AddNote')
+                        if(requestBody.action=='AddNote')
                         {
                                 // options for GET
                                 var optionsget = {
@@ -110,7 +110,7 @@ restService.post('/hook', function (req, res) {
                                 });
                                 
                                 
-                        }*/
+                        }
                             
                         if (requestBody.result.fulfillment) {
                             speech += requestBody.result.fulfillment.speech;
