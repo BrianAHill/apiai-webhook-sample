@@ -91,6 +91,7 @@ function getRequest(url) {
             } else {
                 failure(error);
             }
+        https.request.end();
         });
     });
 }
