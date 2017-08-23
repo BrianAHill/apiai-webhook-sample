@@ -96,7 +96,7 @@ function getRequest(strpath) {
     console.info(optionsget);
     console.info('Do the GET call');
 
-    var reqGet = http.get(optionsget, function(res) {
+    var reqGet = https.get(optionsget, function(res) {
         console.log("statusCode: ", res.statusCode);
         console.log("headers: ", res.headers);
 
