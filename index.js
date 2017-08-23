@@ -4,6 +4,7 @@ const host = 'www.pcrecruiter.net';
 
 
 exports.hook = (req, res) => {
+  console.log('here');
   // Get the city and date from the request
   let FirstName = req.body.result.parameters['FirstName']; // first name required
   let LastName = req.body.result.parameters['LastName']; // last name required
