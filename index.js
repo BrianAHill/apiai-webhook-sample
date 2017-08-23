@@ -81,24 +81,47 @@ restService.post('/hook', function (req, res) {
     }
 });
 
-function getRequest(urlpath) {
-    var https=require('https');
-    var options = {
-      host: host,
-      port: 443,
-      path: urlpath,
-      method: 'GET'
+function performRequest(strpath) {
+    var https = require('https');
+
+    var optionsget = {
+        host : host,
+        port : 443,
+        path : strpath,
+        method : 'GET'
     };
 
-    https.request(options, function(res) {
-      console.log('STATUS: ' + res.statusCode);
-      console.log('HEADERS: ' + JSON.stringify(res.headers));
-      res.setEncoding('utf8');
-      res.on('data', function (chunk) {
-        console.log('BODY: ' + chunk);
-      });
-    }).end();
-    
+
+    console.info('Options prepared:');
+    console.info(optionsget);
+    console.info('Do the GET call');
+
+    var reqGet = http.get(optionsget, function(res) {
+        console.log("statusCode: ", res.statusCode);
+        console.log("headers: ", res.headers);
+
+        buffer='';
+
+        res.on('data', function(d) {
+            //console.info('GET result:\n');
+            //process.stdout.write(d);
+            buffer += d.toString();
+            //console.info('\n\nCall completed');
+        });
+
+        res.on('end', function() {
+            console.info('GET result:\n');
+            console.log(buffer);
+            process.stdout.write(buffer);
+            console.info('\n\nCall completed');
+        });
+
+    });
+    reqGet.on('error', function(e) {
+        console.error(e);
+    });
+
+    reqGet.end();
 }
 
 restService.listen((process.env.PORT || 5000), function () {
