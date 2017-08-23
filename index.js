@@ -13,7 +13,7 @@ exports.hook = (req, res) => {
   let AppId=req.headers.appid;
   let ApplicationKey=req.headers.applicationkey;
 
-  var AuthURL=encodeURI(host + '/rest/api/access-token?DatabaseId=' + DatabaseId + '&Username=' + UserId + '&Password=' + Password + '&AppId=' + AppId + '&ApiKey=' + ApplicationKey);      
+  let AuthURL=encodeURI(host + '/rest/api/access-token?DatabaseId=' + DatabaseId + '&Username=' + UserId + '&Password=' + Password + '&AppId=' + AppId + '&ApiKey=' + ApplicationKey);      
         
   getRequest(AuthURL).then(function (body1) {
      let authResponse = JSON.parse(body1);
