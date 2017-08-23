@@ -41,15 +41,15 @@ restService.post('/hook', function (req, res) {
                          let ResultCount=objCanidates.TotalRecords;
                          if(ResultCount>1)
                          {
-                            speech="Too many results returned, please narrow down your results by Company.";
+                            speech='Too many results returned, please narrow down your results by Company.';
                          }
                          else if(ResultCount==0)
                          {
-                            speech="We could not find that record.";
+                            speech='We could not find that record.';
                          }
                          else
                          {
-                            speech="RecordFound";
+                            speech='RecordFound';
                          }
                     });  
                 }
