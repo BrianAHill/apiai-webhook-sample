@@ -60,7 +60,8 @@ function getRequest(url) {
                 failure(error);
             }
         });
-
+    });
+});
 
 restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
