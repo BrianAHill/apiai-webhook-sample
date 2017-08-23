@@ -51,6 +51,17 @@ restService.post('/hook', function (req, res) {
     }
 });
 
+function getRequest(url) {
+    return new Promise(function (success, failure) {
+        request(url, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                success(body);
+            } else {
+                failure(error);
+            }
+        });
+
+
 restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
 });
