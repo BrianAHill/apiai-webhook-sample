@@ -1,7 +1,9 @@
 'use strict';
-
+const restService = express();
 const express = require('express');
 const bodyParser = require('body-parser');
+restService.use(bodyParser.json());
+var https = require('https');
 
 
 const restService = express();
