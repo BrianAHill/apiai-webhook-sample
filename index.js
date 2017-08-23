@@ -100,7 +100,7 @@ function getRequest(strpath) {
         console.log("statusCode: ", res.statusCode);
         console.log("headers: ", res.headers);
 
-        buffer='';
+        var buffer='';
 
         res.on('data', function(d) {
             //console.info('GET result:\n');
