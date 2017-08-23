@@ -28,12 +28,12 @@ restService.post('/hook', function (req, res) {
                 speech = '';
 
                 if (requestBody.result.fulfillment) {
-                      var AuthURL=encodeURI(host + '/rest/api/access-token?DatabaseId=' + DatabaseId + '&Username=' + UserId + '&Password=' + Password + '&AppId=' + AppId + '&ApiKey=' + ApplicationKey);      
+                      var AuthURL=encodeURI('/rest/api/access-token?DatabaseId=' + DatabaseId + '&Username=' + UserId + '&Password=' + Password + '&AppId=' + AppId + '&ApiKey=' + ApplicationKey);      
                       console.log('Before Auth Request',AuthURL);
                       getRequest(AuthURL).then(function (body1) {
                          console.log('Making Auth Request');
                          let authResponse = JSON.parse(body1);
-                         let SearchCandidateURL=encodeURI(host + '/rest/api/candidates?Query=FirstName eq ' + FirstName + ' and LastName eq ' + LastName + '&ResultsPerPage=25&SessionId=' + authResponse.SessionId);
+                         let SearchCandidateURL=encodeURI('/rest/api/candidates?Query=FirstName eq ' + FirstName + ' and LastName eq ' + LastName + '&ResultsPerPage=25&SessionId=' + authResponse.SessionId);
                          console.log(SearchCandidateURL);
                          return getRequest(SearchCandidateURL);
                       }).then(function (body2) {
@@ -81,19 +81,24 @@ restService.post('/hook', function (req, res) {
     }
 });
 
-function getRequest(url) {
-   var https=require('https');
-    return new Promise(function (success, failure) {
-        https.request(url, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                console.log('Success Request');
-                success(body);
-            } else {
-                failure(error);
-            }
-        });
-    });
-    https.request.end();
+function getRequest(urlpath) {
+    var https=require('https');
+    var options = {
+      host: host,
+      port: 443,
+      path: urlpath,
+      method: 'GET'
+    };
+
+    https.request(options, function(res) {
+      console.log('STATUS: ' + res.statusCode);
+      console.log('HEADERS: ' + JSON.stringify(res.headers));
+      res.setEncoding('utf8');
+      res.on('data', function (chunk) {
+        console.log('BODY: ' + chunk);
+      });
+    }).end();
+    
 }
 
 restService.listen((process.env.PORT || 5000), function () {
