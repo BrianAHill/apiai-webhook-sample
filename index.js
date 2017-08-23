@@ -81,7 +81,7 @@ restService.post('/hook', function (req, res) {
     }
 });
 
-function performRequest(strpath) {
+function getRequest(strpath) {
     var https = require('https');
 
     var optionsget = {
