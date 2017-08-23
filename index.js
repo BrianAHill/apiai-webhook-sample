@@ -1,154 +1,60 @@
 'use strict';
+const http = require('https');
+const host = 'www.pcrecruiter.net';
+let request = require('request');
 
-const express = require('express');
-const bodyParser = require('body-parser');
-var promise=require('promise');
-var host="www.pcrecruiter.net"
-var port=443
+exports.hook = (req, res) => {
+  // Get the city and date from the request
+  let FirstName = req.body.result.parameters['FirstName']; // first name required
+  let LastName = req.body.result.parameters['LastName']; // last name required
+  let UserId=req.headers.userid;
+  let DatabaseId=req.headers.databaseid;
+  let Password=req.headers.password;
+  let AppId=req.headers.appid;
+  let ApplicationKey=req.headers.applicationkey;
 
-const restService = express();
-restService.use(bodyParser.json());
-var https = require('https');
-
-function GetJSON(options,cb)
-{
-        https.request(options,function(res){
-                var body='';
-                
-                res.on('data',function(chunk){
-                        body+=chunk;
-                });
-                              
-                res.on('end',function(){
-                        var result=JSON.parse(body);
-                        cb(null,result);
-                });    
-                
-                res.on('error',cb);
-                
-                }).end();                
-}
-
-//Gets the session tokena and returns it as a string to use for other calls
-function GetSessionToken(req,cb)
-{
-        var UserId=req.headers.userid;
-        var DatabaseId=req.headers.databaseid;
-        var Password=req.headers.password;
-        var AppId=req.headers.appid;
-        var ApplicationKey=req.headers.applicationkey;
-        var TokenReturn;
-
-
-        // options for GET
-        var optionsget = {
-            host : host, // here only the domain name
-            port : port,
-            path : '/rest/api/access-token?DatabaseId=' + DatabaseId + '&Username=' + UserId + '&Password=' + Password + '&AppId=' + AppId + '&ApiKey=' + ApplicationKey, // the rest of the url with parameters if needed
-            method : 'GET' // do GET
-        };
-
-        GetJSON(optionsget,function(err,result){
-                if(err){
-                        return console.log('Error getting Token: ',err);       
-                }
-                cb(null,result);
-        });
+  var AuthURL=encodeURI(host + '/rest/api/access-token?DatabaseId=' + DatabaseId + '&Username=' + UserId + '&Password=' + Password + '&AppId=' + AppId + '&ApiKey=' + ApplicationKey);      
         
-       
-   
-}
+  getRequest(AuthURL).then(function (body1) {
+     let authResponse = JSON.parse(body1);
+     let SearchCandidateURL=encodeURI(host + '/rest/api/candidates?Query=FirstName eq ' + FirstName + ' and LastName eq ' + LastName + '&ResultsPerPage=25&SessionId=' + authResponse.SessionId);
+     return getRequest(SearchCandidateURL);
+  }).then(function (body2) {
+     //Count the number of candididates that came back
+     let objCandidates=JSON.parse(body2);
+     let ResultCount=objCanidates.TotalRecords;
+     if(ResultCount>1)
+     {
+        output="Too many results returned, please narrow down your results by Company.";
+     }
+     else if(ResultCount==0)
+     {
+        output="We could not find that record.";
+     }
+     else
+     {
+        output="RecordFound";
+     }
 
-restService.post('/hook', function (req, res) {
-
-    var Token;
-    var FirstName;
-    var LastName;
-        
-    console.log('hook request');
-    try {
-
-        var speech = 'empty speech';
-   
-        GetSessionToken(req,function(err,result){
-
-                if(err){
-                        return console.log('Error getting Token: ',err);       
-                }
-        
-                Token=result.SessionId;
-                              
-                
-                 if (req.body) {
-                    var requestBody = req.body;
-                    console.log(requestBody.result);
-                    FirstName=requestBody.result.parameters.FirstName;
-                    LastName=requestBody.result.parameters.LastName;
-
-                      
-                    if (requestBody.result) {
-                        speech = '';
-                        console.log('About To Add Note1');
-                        console.log(requestBody.result.action);//test
-                            
-                        if(requestBody.action=='AddNote')
-                        {
-                                // options for GET
-                                var optionscan= {
-                                    host : host, // here only the domain name
-                                    port : port,
-                                    path : encodeURI('/rest/api/candidates?Query=FirstName eq ' + FirstName + ' and LastName eq ' + LastName + '&ResultsPerPage=25&SessionId=' + Token), // the rest of the url with parameters if needed
-                                    method : 'GET' // do GET
-                                };
-                                                                                               
-                                //Search for the candidate record
-                                GetJSON(optionscan,function(err,result){
-                                if(err){
-                                        return console.log('Error getting Token: ',err);       
-                                }
-                                        console.log('About to call URL');
-                                        cb(null,result);
-                                        console.log(result);
-                                });
-                                
-                                
-                        }
-                            
-                        if (requestBody.result.fulfillment) {
-                            speech += requestBody.result.fulfillment.speech;
-                            speech += 'You would like to add a note to ' + FirstName + ' ' + LastName + '?';
-                        }
-
-                        /*if (requestBody.result.action) {
-                            speech += 'action: ' + requestBody.result.action;
-                        }*/
-                    }
-                }
-
-                console.log('result: ', speech);
-
-                return res.json({
-                    speech: speech,
-                    displayText: speech,
-                    source: 'apiai-webhook-sample'
-                });
-                
-                
-        });          
-            
+     res.setHeader('Content-Type', 'application/json');
+     res.send(JSON.stringify({ 'speech': output, 'displayText': output }));
           
-    } catch (err) {
-        console.error("Can't process request", err);
+  }).catch((error) => {
+     // If there is an error let the user know
+     res.setHeader('Content-Type', 'application/json');
+     res.send(JSON.stringify({ 'speech': error, 'displayText': error }));
+  });        
 
-        return res.status(400).json({
-            status: {
-                code: 400,
-                errorType: err.message
+};
+
+function getRequest(url) {
+    return new Promise(function (success, failure) {
+        request(url, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                success(body);
+            } else {
+                failure(error);
             }
         });
-    }
-});
-
-restService.listen((process.env.PORT || 5000), function () {
-    console.log("Server listening");
-});
+    });
+}
