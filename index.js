@@ -83,7 +83,7 @@ restService.post('/hook', function (req, res) {
 
 function getRequest(url) {
     return new Promise(function (success, failure) {
-        require('https');
+        var https=require('https');
         https.request(url, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log('Success Request');
