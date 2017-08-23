@@ -2,7 +2,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const host='https://www2.pcrecruiter.net';
+const host='www.pcrecruiter.net';
 const restService = express();
 restService.use(bodyParser.json());
 
