@@ -2,7 +2,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const host='www.pcrecruiter.net';
 
 const restService = express();
 restService.use(bodyParser.json());
@@ -11,12 +11,16 @@ restService.use(bodyParser.json());
 restService.post('/hook', function (req, res) {
 
     console.log('hook request');
-
+    var FirstName = req.body.result.parameters['FirstName']; // first name required
+    var LastName = req.body.result.parameters['LastName']; // last name required
+    var UserId=req.headers.userid;
+    var DatabaseId=req.headers.databaseid;
+    var Password=req.headers.password;
+    var AppId=req.headers.appid;
+    var ApplicationKey=req.headers.applicationkey;
+        
     try {
         var speech = 'empty speech';
-
- 
-
         
         if (req.body) {
             var requestBody = req.body;
