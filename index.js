@@ -3,7 +3,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const host='www.pcrecruiter.net';
-var request = require('request');
 const restService = express();
 restService.use(bodyParser.json());
 
@@ -81,6 +80,7 @@ restService.post('/hook', function (req, res) {
 
 function getRequest(url) {
     return new Promise(function (success, failure) {
+        var request = require('request');
         request(url, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 success(body);
