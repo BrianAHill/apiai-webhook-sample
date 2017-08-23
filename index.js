@@ -29,8 +29,9 @@ restService.post('/hook', function (req, res) {
 
                 if (requestBody.result.fulfillment) {
                       var AuthURL=encodeURI(host + '/rest/api/access-token?DatabaseId=' + DatabaseId + '&Username=' + UserId + '&Password=' + Password + '&AppId=' + AppId + '&ApiKey=' + ApplicationKey);      
-
+                      console.log('Before Auth Request',AuthURL);
                       getRequest(AuthURL).then(function (body1) {
+                         console.log('Making Auth Request');
                          let authResponse = JSON.parse(body1);
                          let SearchCandidateURL=encodeURI(host + '/rest/api/candidates?Query=FirstName eq ' + FirstName + ' and LastName eq ' + LastName + '&ResultsPerPage=25&SessionId=' + authResponse.SessionId);
                          console.log(SearchCandidateURL);
