@@ -33,6 +33,7 @@ restService.post('/hook', function (req, res) {
                       getRequest(AuthURL).then(function (body1) {
                          let authResponse = JSON.parse(body1);
                          let SearchCandidateURL=encodeURI(host + '/rest/api/candidates?Query=FirstName eq ' + FirstName + ' and LastName eq ' + LastName + '&ResultsPerPage=25&SessionId=' + authResponse.SessionId);
+                         console.log(SearchCandidateURL);
                          return getRequest(SearchCandidateURL);
                       }).then(function (body2) {
                          //Count the number of candididates that came back
