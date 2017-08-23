@@ -36,6 +36,7 @@ restService.post('/hook', function (req, res) {
                          return getRequest(SearchCandidateURL);
                       }).then(function (body2) {
                          //Count the number of candididates that came back
+                         console.log(body2);
                          let objCandidates=JSON.parse(body2);
                          let ResultCount=objCanidates.TotalRecords;
                          if(ResultCount>1)
