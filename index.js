@@ -82,8 +82,8 @@ restService.post('/hook', function (req, res) {
 });
 
 function getRequest(url) {
+   var https=require('https');
     return new Promise(function (success, failure) {
-        var https=require('https');
         https.request(url, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log('Success Request');
@@ -91,9 +91,9 @@ function getRequest(url) {
             } else {
                 failure(error);
             }
-        https.request.end();
         });
     });
+    https.request.end();
 }
 
 restService.listen((process.env.PORT || 5000), function () {
