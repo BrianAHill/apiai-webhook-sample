@@ -7,6 +7,17 @@ const bodyParser = require('body-parser');
 const restService = express();
 restService.use(bodyParser.json());
 
+function getRequest(url) {
+    return new Promise(function (success, failure) {
+        request(url, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                success(body);
+            } else {
+                failure(error);
+            }
+        });
+    });
+
 restService.post('/hook', function (req, res) {
 
     console.log('hook request');
