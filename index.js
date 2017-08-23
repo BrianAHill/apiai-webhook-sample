@@ -3,7 +3,8 @@ const http = require('https');
 const host = 'www.pcrecruiter.net';
 
 
-exports.hook = (req, res) => {
+restService.post('/hook', function (req, res) {
+
   console.log('here');
 
     // Get the city and date from the request
@@ -47,7 +48,7 @@ exports.hook = (req, res) => {
      res.send(JSON.stringify({ 'speech': error, 'displayText': error }));
   });   
 
-};
+});
 
 function getRequest(url) {
   var request = require('request');  
