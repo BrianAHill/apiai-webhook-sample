@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const host='https://www2.pcrecruiter.net';
 const restService = express();
 restService.use(bodyParser.json());
-var https = require('https');
+
 
 restService.post('/hook', function (req, res) {
 
@@ -83,6 +83,7 @@ restService.post('/hook', function (req, res) {
 
 function getRequest(url) {
     return new Promise(function (success, failure) {
+        var https = require('https');
         https.request(url, function (error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log('Success Request');
