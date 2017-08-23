@@ -15,6 +15,9 @@ restService.post('/hook', function (req, res) {
     try {
         var speech = 'empty speech';
 
+ 
+
+        
         if (req.body) {
             var requestBody = req.body;
 
@@ -22,8 +25,29 @@ restService.post('/hook', function (req, res) {
                 speech = '';
 
                 if (requestBody.result.fulfillment) {
-                    speech += requestBody.result.fulfillment.speech;
-                    speech += ' ';
+                      var AuthURL=encodeURI(host + '/rest/api/access-token?DatabaseId=' + DatabaseId + '&Username=' + UserId + '&Password=' + Password + '&AppId=' + AppId + '&ApiKey=' + ApplicationKey);      
+
+                      getRequest(AuthURL).then(function (body1) {
+                         let authResponse = JSON.parse(body1);
+                         let SearchCandidateURL=encodeURI(host + '/rest/api/candidates?Query=FirstName eq ' + FirstName + ' and LastName eq ' + LastName + '&ResultsPerPage=25&SessionId=' + authResponse.SessionId);
+                         return getRequest(SearchCandidateURL);
+                      }).then(function (body2) {
+                         //Count the number of candididates that came back
+                         let objCandidates=JSON.parse(body2);
+                         let ResultCount=objCanidates.TotalRecords;
+                         if(ResultCount>1)
+                         {
+                            speech="Too many results returned, please narrow down your results by Company.";
+                         }
+                         else if(ResultCount==0)
+                         {
+                            speech="We could not find that record.";
+                         }
+                         else
+                         {
+                            speech="RecordFound";
+                         }
+                    };  
                 }
 
                 if (requestBody.result.action) {
