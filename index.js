@@ -113,9 +113,9 @@ function getRequest(strpath) {
             res.on('end', function() {
                 console.info('GET result:\n');
                 console.log(buffer);
-                return cb(buffer);
                 console.info('\n\nCall completed');
             });
+            success(buffer);
         });
         reqGet.on('error', function(e) {
             console.error(e);
