@@ -32,7 +32,8 @@ restService.post('/hook', function (req, res) {
                       console.log('Before Auth Request',AuthURL);
                       getRequest(AuthURL).then(function (body1) {
                          console.log('Making Auth Request');
-                         let authResponse = JSON.parse(body1);
+                         console.log(body1);
+                          let authResponse = JSON.parse(body1);
                          let SearchCandidateURL=encodeURI('/rest/api/candidates?Query=FirstName eq ' + FirstName + ' and LastName eq ' + LastName + '&ResultsPerPage=25&SessionId=' + authResponse.SessionId);
                          console.log(SearchCandidateURL);
                          return getRequest(SearchCandidateURL);
