@@ -113,6 +113,8 @@ function getRequest(strpath) {
             res.on('end', function() {
                 console.info('GET result:\n');
                 //console.log(buffer);
+                console.log('Logging Buffer:',buffer);
+                success(buffer);
                 console.info('\n\nCall completed');
             });
         });
@@ -121,8 +123,8 @@ function getRequest(strpath) {
         });
 
         reqGet.end();
-        console.log('Logging Buffer:',buffer);
-        success(buffer);
+
+
     });
 }
 
