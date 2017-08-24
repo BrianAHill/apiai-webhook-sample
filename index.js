@@ -95,15 +95,13 @@ function getRequest(strpath) {
         };
 
 
-        console.info('Options prepared:');
-        console.info(optionsget);
-        console.info('Do the GET call');
+        //console.info('Options prepared:');
+        //console.info(optionsget);
+        //console.info('Do the GET call');
 
         var reqGet = https.get(optionsget, function(res,cb) {
             console.log("statusCode: ", res.statusCode);
             console.log("headers: ", res.headers);
-
-
 
             res.on('data', function(d) {
                 //console.info('GET result:\n');
@@ -114,7 +112,7 @@ function getRequest(strpath) {
 
             res.on('end', function() {
                 console.info('GET result:\n');
-                console.log(buffer);
+                //console.log(buffer);
                 console.info('\n\nCall completed');
             });
         });
@@ -123,6 +121,7 @@ function getRequest(strpath) {
         });
 
         reqGet.end();
+        console.log('Logging Buffer:',buffer);
         success(buffer);
     });
 }
