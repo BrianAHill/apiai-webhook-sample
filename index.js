@@ -56,19 +56,17 @@ restService.post('/hook', function (req, res) {
                          }
                           
                          console.log('Speech:',speech);
-                    });  
+                        return res.json({
+                            speech: speech,
+                            displayText: speech,
+                            source: 'apiai-webhook-sample'
+                        });
+                      });  
                 }
 
             }
         }
-        console.log('why do i not get here?');
-        console.log('result: ', speech);
 
-        return res.json({
-            speech: speech,
-            displayText: speech,
-            source: 'apiai-webhook-sample'
-        });
     } catch (err) {
         console.error("Can't process request", err);
 
