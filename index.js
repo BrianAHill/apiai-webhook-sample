@@ -113,10 +113,11 @@ function getRequest(strpath,cb) {
             res.on('end', function() {
                 console.info('GET result:\n');
                 console.log(buffer);
-                cb(buffer);
+                res=buffer;
                 console.info('\n\nCall completed');
             });
 
+           return res;
         });
         reqGet.on('error', function(e) {
             console.error(e);
