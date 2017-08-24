@@ -83,6 +83,7 @@ restService.post('/hook', function (req, res) {
 
 function getRequest(strpath) {
     return new Promise(function (success, failure) {
+        var buffer='';
         var https = require('https');
 
         var optionsget = {
@@ -101,7 +102,7 @@ function getRequest(strpath) {
             console.log("statusCode: ", res.statusCode);
             console.log("headers: ", res.headers);
 
-            var buffer='';
+
 
             res.on('data', function(d) {
                 //console.info('GET result:\n');
@@ -115,13 +116,13 @@ function getRequest(strpath) {
                 console.log(buffer);
                 console.info('\n\nCall completed');
             });
-            success(buffer);
         });
         reqGet.on('error', function(e) {
             console.error(e);
         });
 
         reqGet.end();
+        success(buffer);
     });
 }
 
