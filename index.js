@@ -54,6 +54,8 @@ restService.post('/hook', function (req, res) {
                          {
                             speech='RecordFound';
                          }
+                          
+                         console.log('Speech:',speech);
                     });  
                 }
 
