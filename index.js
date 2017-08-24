@@ -81,7 +81,7 @@ restService.post('/hook', function (req, res) {
     }
 });
 
-function getRequest(strpath,cb) {
+function getRequest(strpath) {
     return new Promise(function (success, failure) {
         var https = require('https');
 
@@ -97,7 +97,7 @@ function getRequest(strpath,cb) {
         console.info(optionsget);
         console.info('Do the GET call');
 
-        var reqGet = https.get(optionsget, function(res) {
+        var reqGet = https.get(optionsget, function(res,cb) {
             console.log("statusCode: ", res.statusCode);
             console.log("headers: ", res.headers);
 
