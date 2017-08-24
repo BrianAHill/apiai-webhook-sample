@@ -113,7 +113,7 @@ function getRequest(strpath) {
             res.on('end', function() {
                 console.info('GET result:\n');
                 console.log(buffer);
-                return process.stdout.write(buffer);
+                process.stdout.write(buffer);
                 console.info('\n\nCall completed');
             });
 
