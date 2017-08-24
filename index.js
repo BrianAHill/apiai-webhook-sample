@@ -82,46 +82,48 @@ restService.post('/hook', function (req, res) {
 });
 
 function getRequest(strpath) {
-    var https = require('https');
+    return new Promise(function (success, failure) {
+        var https = require('https');
 
-    var optionsget = {
-        host : host,
-        port : 443,
-        path : strpath,
-        method : 'GET'
-    };
+        var optionsget = {
+            host : host,
+            port : 443,
+            path : strpath,
+            method : 'GET'
+        };
 
 
-    console.info('Options prepared:');
-    console.info(optionsget);
-    console.info('Do the GET call');
+        console.info('Options prepared:');
+        console.info(optionsget);
+        console.info('Do the GET call');
 
-    var reqGet = https.get(optionsget, function(res) {
-        console.log("statusCode: ", res.statusCode);
-        console.log("headers: ", res.headers);
+        var reqGet = https.get(optionsget, function(res) {
+            console.log("statusCode: ", res.statusCode);
+            console.log("headers: ", res.headers);
 
-        var buffer='';
+            var buffer='';
 
-        res.on('data', function(d) {
-            //console.info('GET result:\n');
-            //process.stdout.write(d);
-            buffer += d.toString();
-            //console.info('\n\nCall completed');
+            res.on('data', function(d) {
+                //console.info('GET result:\n');
+                //process.stdout.write(d);
+                buffer += d.toString();
+                //console.info('\n\nCall completed');
+            });
+
+            res.on('end', function() {
+                console.info('GET result:\n');
+                console.log(buffer);
+                process.stdout.write(buffer);
+                console.info('\n\nCall completed');
+            });
+
+        });
+        reqGet.on('error', function(e) {
+            console.error(e);
         });
 
-        res.on('end', function() {
-            console.info('GET result:\n');
-            console.log(buffer);
-            process.stdout.write(buffer);
-            console.info('\n\nCall completed');
-        });
-
+        reqGet.end();
     });
-    reqGet.on('error', function(e) {
-        console.error(e);
-    });
-
-    reqGet.end();
 }
 
 restService.listen((process.env.PORT || 5000), function () {
