@@ -41,6 +41,7 @@ restService.post('/hook', function (req, res) {
                          console.log('Search Candidate Results:',body2);
                          var objCandidates=JSON.parse(body2);
                          var ResultCount=objCandidates.TotalRecords;
+                         console.log('Result Count:',ResultCount);
                          if(ResultCount>1)
                          {
                             speech='Too many results returned, please narrow down your results by Company.';
@@ -56,9 +57,6 @@ restService.post('/hook', function (req, res) {
                     });  
                 }
 
-                if (requestBody.result.action) {
-                    speech += 'action: ' + requestBody.result.action;
-                }
             }
         }
 
