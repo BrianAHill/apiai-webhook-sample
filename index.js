@@ -31,17 +31,16 @@ restService.post('/hook', function (req, res) {
                       var AuthURL=encodeURI('/rest/api/access-token?DatabaseId=' + DatabaseId + '&Username=' + UserId + '&Password=' + Password + '&AppId=' + AppId + '&ApiKey=' + ApplicationKey);      
                       console.log('Before Auth Request',AuthURL);
                       getRequest(AuthURL).then(function (body1) {
-                         console.log('Making Auth Request');
-                         console.log(body1);
-                          let authResponse = JSON.parse(body1);
-                         let SearchCandidateURL=encodeURI('/rest/api/candidates?Query=FirstName eq ' + FirstName + ' and LastName eq ' + LastName + '&ResultsPerPage=25&SessionId=' + authResponse.SessionId);
-                         console.log(SearchCandidateURL);
+                         console.log('Auth Body:',body1);
+                         var authResponse = JSON.parse(body1);
+                         var SearchCandidateURL=encodeURI('/rest/api/candidates?Query=FirstName eq ' + FirstName + ' and LastName eq ' + LastName + '&ResultsPerPage=25&SessionId=' + authResponse.SessionId);
+                         console.log('Search Candidate URL',SearchCandidateURL);
                          return getRequest(SearchCandidateURL);
                       }).then(function (body2) {
                          //Count the number of candididates that came back
-                         console.log(body2);
-                         let objCandidates=JSON.parse(body2);
-                         let ResultCount=objCanidates.TotalRecords;
+                         console.log('Search Candidate Results:',body2);
+                         var objCandidates=JSON.parse(body2);
+                         var ResultCount=objCanidates.TotalRecords;
                          if(ResultCount>1)
                          {
                             speech='Too many results returned, please narrow down your results by Company.';
@@ -111,11 +110,11 @@ function getRequest(strpath) {
             });
 
             res.on('end', function() {
-                console.info('GET result:\n');
+                //console.info('GET result:\n');
                 //console.log(buffer);
-                console.log('Logging Buffer:',buffer);
+                //console.log('Logging Buffer:',buffer);
                 success(buffer);
-                console.info('\n\nCall completed');
+                //console.info('\n\nCall completed');
             });
         });
         reqGet.on('error', function(e) {
