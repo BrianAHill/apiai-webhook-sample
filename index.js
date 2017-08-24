@@ -61,7 +61,7 @@ restService.post('/hook', function (req, res) {
 
             }
         }
-
+        console.log('why do i not get here?');
         console.log('result: ', speech);
 
         return res.json({
