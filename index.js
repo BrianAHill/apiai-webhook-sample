@@ -62,19 +62,24 @@ restService.post('/hook', function (req, res) {
                              speech='About to add note to: \n' + FirstName + ' ' + LastName + '\n' + Title + '\n' + Address + '\nWhat is the content of the note?';
                          }
                           
-                         console.log('Speech:',speech);
-                        return res.json({
+                        console.log('Speech:',speech);
+                        
+                            var options = {
+                                contexts: [
+                                    {
+                                        name: 'CandidateId',
+                                        parameters: {
+                                            'FirstName': FirstName
+                                        }
+                                    }
+                                ]
+                            };                          
+                          
+                         return res.json({
                             speech: speech,
                             displayText: speech,
                             source: 'apiai-webhook-sample',
-                            contexts: [
-                            {
-                                name: 'context_number_one',
-                                parameters: {
-                                    'artist': 'elvis'
-                                }
-                            }
-                        ]
+                            contextOut:options
                         });
                       });  
                 }
