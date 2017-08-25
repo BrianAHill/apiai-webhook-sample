@@ -57,7 +57,7 @@ restService.post('/hook', function (req, res) {
                              var Title=objCandidates.Results.Title;
                              var Address=objCandidates.Results.Address;
                              
-                             speech='Found the candidate: ' + FirstName + ' ' + LastName + '\n' + Title + '\n' + Address;
+                             speech='Is the the candidate you were referring to?: \n' + FirstName + ' ' + LastName + '\n' + Title + '\n' + Address;
                          }
                           
                          console.log('Speech:',speech);
