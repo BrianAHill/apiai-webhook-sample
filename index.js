@@ -64,22 +64,13 @@ restService.post('/hook', function (req, res) {
                           
                         console.log('Speech:',speech);
                         
-                            var options = {
-                                contexts: [
-                                    {
-                                        name: 'CandidateId',
-                                        parameters: {
-                                            'FirstName': FirstName
-                                        }
-                                    }
-                                ]
-                            };                          
+                     
                           
                          return res.json({
                             speech: speech,
                             displayText: speech,
                             source: 'apiai-webhook-sample',
-                            contextOut:contexts:[{name:'CandidateId',parameters: {'FirstName':'Joe'}}]'
+                            contextOut:contexts:[{name:'CandidateId',parameters: {'FirstName':'Joe'}}]
                         });
                       });  
                 }
