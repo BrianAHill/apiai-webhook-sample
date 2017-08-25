@@ -52,7 +52,12 @@ restService.post('/hook', function (req, res) {
                          }
                          else
                          {
-                            speech='RecordFound';
+                             var FirstName=objCandidate.FirstName;
+                             var LastName=objCandidate.LastName;
+                             var Title=objCandidate.Title;
+                             var Address=objCandidate.Address;
+                             
+                             speech='Found the candidate: ' + FirstName + ' ' + LastName + '\n' + Title + '\n' + Address;
                          }
                           
                          console.log('Speech:',speech);
