@@ -52,10 +52,10 @@ restService.post('/hook', function (req, res) {
                          }
                          else
                          {
-                             var FirstName=objCandidates.FirstName;
-                             var LastName=objCandidates.LastName;
-                             var Title=objCandidates.Title;
-                             var Address=objCandidates.Address;
+                             var FirstName=objCandidates.Results.FirstName;
+                             var LastName=objCandidates.Results.LastName;
+                             var Title=objCandidates.Results.Title;
+                             var Address=objCandidates.Results.Address;
                              
                              speech='Found the candidate: ' + FirstName + ' ' + LastName + '\n' + Title + '\n' + Address;
                          }
