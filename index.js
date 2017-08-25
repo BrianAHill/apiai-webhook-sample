@@ -70,7 +70,7 @@ restService.post('/hook', function (req, res) {
                             speech: speech,
                             displayText: speech,
                             source: 'apiai-webhook-sample',
-                            contextOut:[{name:'CandidateId',parameters: {'FirstName':'Joe'}}]
+                            contextOut:[{name:'CandidateId',parameters: {'FirstName':objCandidates.Results[0].CandidateId}}]
                         });
                       });  
                 }
