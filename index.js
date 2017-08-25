@@ -59,7 +59,7 @@ restService.post('/hook', function (req, res) {
                              var Title=objCandidates.Results[0].Title;
                              var Address=objCandidates.Results[0].Address;
                              
-                             speech='About to add note to: \n' + FirstName + ' ' + LastName + '\n' + Title + '\n' + Address + '\nWhat is the content of the note?';
+                             speech='I think I found the person is this the correct record?:\n' + FirstName + ' ' + LastName + '\n' + Title + '\n' + Address;
                          }
                           
                         console.log('Speech:',speech);
