@@ -10,13 +10,7 @@ restService.use(bodyParser.json());
 restService.post('/hook', function (req, res) {
 
     console.log('hook request');
-    var FirstName = req.body.result.parameters['FirstName']; // first name required
-    var LastName = req.body.result.parameters['LastName']; // last name required
-    var UserId=req.headers.userid;
-    var DatabaseId=req.headers.databaseid;
-    var Password=req.headers.password;
-    var AppId=req.headers.appid;
-    var ApplicationKey=req.headers.applicationkey;
+
         
     try {
         var speech = 'empty speech';
@@ -30,7 +24,35 @@ restService.post('/hook', function (req, res) {
                 speech = '';
 
                 if (requestBody.result.fulfillment) {
-                      var AuthURL=encodeURI('/rest/api/access-token?DatabaseId=' + DatabaseId + '&Username=' + UserId + '&Password=' + Password + '&AppId=' + AppId + '&ApiKey=' + ApplicationKey);      
+                    FindCandidate(req);
+                }
+
+            }
+        }
+
+    } catch (err) {
+        console.error("Can't process request", err);
+
+        return res.status(400).json({
+            status: {
+                code: 400,
+                errorType: err.message
+            }
+        });
+    }
+});
+
+function FindCandidate(req)
+{
+    var FirstName = req.body.result.parameters['FirstName']; // first name required
+    var LastName = req.body.result.parameters['LastName']; // last name required
+    var UserId=req.headers.userid;
+    var DatabaseId=req.headers.databaseid;
+    var Password=req.headers.password;
+    var AppId=req.headers.appid;
+    var ApplicationKey=req.headers.applicationkey;
+    
+    var AuthURL=encodeURI('/rest/api/access-token?DatabaseId=' + DatabaseId + '&Username=' + UserId + '&Password=' + Password + '&AppId=' + AppId + '&ApiKey=' + ApplicationKey);      
                       console.log('Before Auth Request',AuthURL);
                       getRequest(AuthURL).then(function (body1) {
                          console.log('Auth Body:',body1);
@@ -72,23 +94,9 @@ restService.post('/hook', function (req, res) {
                             source: 'apiai-webhook-sample',
                             contextOut:[{name:'Candidate',parameters: {'CandidateId':objCandidates.Results[0].CandidateId}}]
                         });
-                      });  
-                }
-
-            }
-        }
-
-    } catch (err) {
-        console.error("Can't process request", err);
-
-        return res.status(400).json({
-            status: {
-                code: 400,
-                errorType: err.message
-            }
-        });
-    }
-});
+                      });
+    
+}
 
 function getRequest(strpath) {
     return new Promise(function (success, failure) {
