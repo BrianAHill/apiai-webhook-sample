@@ -178,8 +178,8 @@ function getRequest(strpath,strmethod,strjson) {
         };
 
         var reqGet = https.get(optionsget, function(res,cb) {
-            console.log("statusCode: ", res.statusCode);
-            console.log("headers: ", res.headers);
+            //console.log("statusCode: ", res.statusCode);
+            //console.log("headers: ", res.headers);
 
             res.on('data', function(d) {
                 buffer += d.toString();
