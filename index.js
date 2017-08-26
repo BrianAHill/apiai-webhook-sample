@@ -23,7 +23,7 @@ restService.post('/hook', function (req, res) {
 
 
                 if (requestBody.result.fulfillment) {
-                    FindCandidate(req);
+                    FindCandidate(req,res);
                 }
 
             }
@@ -41,7 +41,7 @@ restService.post('/hook', function (req, res) {
     }
 });
 
-function FindCandidate(req)
+function FindCandidate(req,res)
 {
     var FirstName = req.body.result.parameters['FirstName']; // first name required
     var LastName = req.body.result.parameters['LastName']; // last name required
