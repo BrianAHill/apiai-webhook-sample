@@ -171,6 +171,7 @@ function getRequest(strpath,strmethod,strjson) {
         var optionsget = {
             host : host,
             port : 443,
+            headers: {'Content-Type': 'application/json'},
             path : strpath,
             method : strmethod,
             json:strjson
