@@ -25,7 +25,7 @@ restService.post('/hook', function (req, res) {
                 {
                     FindCandidate(req,res);
                 }
-                elseif(requestBody.result.action=="WriteNote")
+                else if(requestBody.result.action=="WriteNote")
                 {
                     WriteNote(req,res);    
                 }    
