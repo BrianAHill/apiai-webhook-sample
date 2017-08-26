@@ -13,7 +13,6 @@ restService.post('/hook', function (req, res) {
 
         
     try {
-        var speech = 'empty speech';
         
         if (req.body) {
             var requestBody = req.body;
@@ -21,7 +20,7 @@ restService.post('/hook', function (req, res) {
             
             
             if (requestBody.result) {
-                speech = '';
+
 
                 if (requestBody.result.fulfillment) {
                     FindCandidate(req);
@@ -51,6 +50,8 @@ function FindCandidate(req)
     var Password=req.headers.password;
     var AppId=req.headers.appid;
     var ApplicationKey=req.headers.applicationkey;
+
+    var speech = '';
     
     var AuthURL=encodeURI('/rest/api/access-token?DatabaseId=' + DatabaseId + '&Username=' + UserId + '&Password=' + Password + '&AppId=' + AppId + '&ApiKey=' + ApplicationKey);      
                       console.log('Before Auth Request',AuthURL);
